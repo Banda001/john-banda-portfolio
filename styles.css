@@ -497,11 +497,11 @@ body {
     width: 100%;
     z-index: 1000;
     background-color: transparent;
-    padding: 1rem;
+    padding: 0.5rem 1rem;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    transition: all 0.3s ease;
+    transition: background-color 0.3s ease;
 }
 
 .navbar.scrolled {
@@ -519,6 +519,54 @@ body {
     display: block;
     font-size: 1.5rem;
     cursor: pointer;
+    color: var(--text-color);
+}
+
+/* Logo Styles */
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    width: 50px;
+    min-width: 50px;
+    border-radius: 50%;
+    background-color: var(--background-light);
+    padding: 8px;
+    margin: 0;
+    box-shadow: none;
+    transition: none;
+}
+
+.logo:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+.logo-image {
+    height: 34px;
+    width: 34px;
+    object-fit: contain;
+    display: block;
+    border-radius: 0;
+}
+
+/* Desktop Navigation */
+@media screen and (min-width: 768px) {
+    .navbar {
+        justify-content: space-between;
+        padding: 1rem 2rem;
+    }
+    
+    .nav-links {
+        display: flex;
+        gap: 2rem;
+        align-items: center;
+    }
+    
+    .nav-toggle {
+        display: none;
+    }
 }
 
 /* Hero Section */
@@ -531,6 +579,7 @@ body {
     align-items: center;
     text-align: center;
     position: relative;
+    margin-top: 60px;
 }
 
 .hero-content {
