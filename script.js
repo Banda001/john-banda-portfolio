@@ -8,70 +8,20 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Mobile Navigation
-const navToggle = document.querySelector('.nav-toggle');
-const navMenu = document.querySelector('.nav-menu');
-
-navToggle.addEventListener('click', () => {
-    navMenu.classList.toggle('active');
-});
-
-// Close menu when clicking outside
-window.addEventListener('click', (e) => {
-    if (!navMenu.contains(e.target) && !navToggle.contains(e.target)) {
-        navMenu.classList.remove('active');
-    }
-});
-
-// Navigation Scroll
-const navbar = document.querySelector('.navbar');
-window.addEventListener('scroll', () => {
+// Navbar scroll effect
+window.addEventListener('scroll', function() {
+    const navbar = document.querySelector('.navbar');
     if (window.scrollY > 50) {
-        navbar.classList.add('scrolled');
+        navbar.style.background = 'rgba(255, 255, 255, 0.95)';
     } else {
-        navbar.classList.remove('scrolled');
+        navbar.style.background = 'white';
     }
 });
 
-// Smooth Scroll for Anchor Links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-            behavior: 'smooth'
-        });
-        // Close mobile menu if open
-        const navMenu = document.querySelector('.nav-menu');
-        if (navMenu.classList.contains('active')) {
-            navMenu.classList.remove('active');
-        }
-    });
-});
-
-// Contact Form
-const contactForm = document.getElementById('contact-form');
-const formMessage = document.getElementById('form-message');
-
-function handleContactForm(e) {
-    e.preventDefault();
-    
-    const formData = new FormData(contactForm);
-    const data = Object.fromEntries(formData);
-
-    if (!validateForm()) {
-        return false;
-    }
-
-    const emailBody = `Name: ${data.name}\n\n` +
-                      `Email: ${data.email}\n\n` +
-                      `Subject: ${data.subject || 'No subject'}\n\n` +
-                      `Message:\n${data.message}`;
-
-    const emailLink = `mailto:jb938047@gmail.com?subject=${encodeURIComponent(data.subject || 'Portfolio Contact Form Submission')}&body=${encodeURIComponent(emailBody)}`;
-
-    window.location.href = emailLink;
-    
-    return false;
+// Form validation functions
+function validateEmail(email) {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
 }
 
 function validateForm() {
@@ -94,27 +44,8 @@ function validateForm() {
         return false;
     }
     
-    showFormMessage('success', 'Thank you! Your message has been sent.');
-    contactForm.reset();
     return true;
 }
-
-function validateEmail(email) {
-    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return re.test(email);
-}
-
-function showFormMessage(type, message) {
-    formMessage.className = `form-message ${type}`;
-    formMessage.textContent = message;
-    
-    setTimeout(() => {
-        formMessage.className = 'form-message';
-    }, 5000);
-}
-
-// Initialize contact form event listener
-contactForm.addEventListener('submit', handleContactForm);
 
 // Test function for debugging
 function testForm() {
